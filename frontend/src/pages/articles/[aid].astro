@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// create type for fetched articles
+type Article = {
+	article_title: string;
+	article_body: string;
+	article_id: number;
+	article_image_url: string;
+	article_created_at: Date | string;
+};
+
+export async function getStaticPaths() {
+	const response = await fetch('http://localhost:8080/articles');
+	const articles: Article[] = await response.json();
+	const params = articles.map((article) => ({
+		params: { aid: article.article_id.toString() },
+	}));
+	return params;
+}
+
+const { aid } = Astro.params;
+
+// fetch individual article
+const response = await fetch(`http://localhost:8080/articles/${aid}`);
+const article: Article = await response.json();
+
+const dateOptions: any = {
+	weekday: 'long',
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+};
+
+article.article_created_at = new Date(article.article_created_at).toLocaleString("en-US", dateOptions);
+---
+
+<Layout title="Welcome to UAIN.">
+	<main class="m-auto p-6 max-w-4xl ">
+        <a href="/" class="text-red-500 font-medium mb-4">&larr; Back to articles</a>
+		<header class="my-8">
+			<h1 class="text-4xl font-extrabold">{article.article_title}</h1>
+			<p class="text-zinc-400 font-medium">Posted on {article.article_created_at}</p>
+		</header>
+		<div>
+			<img src={article.article_image_url} alt={article.article_title} class="w-full h-auto mb-4" />
+		</div>
+		<article class="my-8">
+			<p class="text-gray-700 text-xl">{article.article_body}</p>
+		</article>
+	</main>
+</Layout>
+

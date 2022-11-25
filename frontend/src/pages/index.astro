@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArticleLink, { Props } from '../components/ArticleLink.astro';
+
+// create type for fetched articles
+type Article = {
+  article_title: string;
+  article_body: string;
+  article_id: number;
+  article_image_url: string;
+};
+
+const response = await fetch('http://localhost:8080/articles');
+const articles: Article[] = await response.json();
+---
+
+<Layout title="Welcome to UAIN.">
+	<main class="m-auto p-6 max-w-4xl h-full">
+		<h1 class="text-4xl font-extrabold">Welcome to <span class="text-red-500">UAIN.</span></h1>
+		<p class="font-bold text-zinc-700 mt-4 mb-4 p-4 border-2 border-zinc-300 rounded-md">
+			Showing the hottest Unreliable News about Elon Musk. Modified and distorted by AI.<br />
+			Open Source: <a class="text-red-500 font-medium" rel="noreferrer" target="_blank" href="https://github.com/adomaitisc/unreliable-news">Collab with me on GitHub</a>
+		</p>
+		<ul role="list" class="grid grid-cols-2 gap-4">
+			{articles.map((article) => (
+				<ArticleLink
+					title={article.article_title}
+					body={article.article_body}
+					href={`/articles/${article.article_id}`}
+				/>
+			))}
+		</ul>
+	</main>
+</Layout>
+

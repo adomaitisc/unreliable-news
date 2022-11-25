@@ -1,0 +1,28 @@
+---
+export interface Props {
+	title: string;
+	body: string;
+	href: string;
+}
+
+const { href, title, body } = Astro.props;
+---
+
+<li class=" list-none flex">
+	<a href={href} class="w-full decoration-transparent p-4 rounded-md border-2 border-zinc-300 hover:bg-red-100 hover:border-red-800 duration-300 transition-all">
+		<h2 class="article-body m-0 text-zinc-800 font-bold text-xl overflow-hidden overflow-ellipsis">
+			{title}
+			<span>&rarr;</span>
+		</h2>
+		<p class="article-body text-base overflow-hidden overflow-ellipsis text-zinc-600">
+			{body}
+		</p>
+	</a>
+</li>
+<style>
+	.article-body {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+	}
+</style>
