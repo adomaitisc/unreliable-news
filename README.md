@@ -1,6 +1,6 @@
 # Unreliable Artificial Intelligence News - UAIN
 
-![image]("imageurl")
+![image]("https://github.com/adomaitisc/unreliable-news/blob/main/assets/unreliablea-artificial-intelligence-news.png?raw=true")
 
 ### Welcome to my dumb side project.
 
