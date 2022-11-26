@@ -1,6 +1,6 @@
 # Unreliable Artificial Intelligence News - UAIN
 
-### Welcome to my dumb side project.
+### Welcome to my dumb side project. - it is the first in go so of course it is sh*t
 
 ![image](https://github.com/adomaitisc/unreliable-news/blob/main/assets/unreliablea-artificial-intelligence-news.png?raw=true)
 
